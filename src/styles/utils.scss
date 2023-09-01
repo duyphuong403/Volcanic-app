@@ -1,0 +1,45 @@
+@use "sass:math";
+
+@function strip-unit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $value: math.div($value, $number);
+    }
+  }
+
+  @return $value;
+}
+
+@function toFixed($float, $digits: 3) {
+  $sass-precision: 5;
+
+  @if $digits > $sass-precision {
+    @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
+    + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
+    + "See https://github.com/sass/sass/issues/1122 for further informations.";
+  }
+
+  $pow: pow(10, $digits);
+  @return math.div(round($float * $pow), $pow);
+}
+
+@mixin font-map($min-font-size, $max-font-size, $min-vw, $max-vw, $modify-min-font-size: null) {
+  $base-size: if($modify-min-font-size, $modify-min-font-size, $min-font-size);
+  font-size: calc(#{$base-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+}
+
+@mixin font-map2($min-font-size, $max-font-size, $min-vw, $max-vw) {
+  $d: math.div(strip-unit($max-font-size - $min-font-size), strip-unit($max-vw - $min-vw));
+  $b: $min-font-size - ($min-vw * $d);
+  font-size: calc(#{toFixed(100 * $d)}vw + #{toFixed($b)});
+}

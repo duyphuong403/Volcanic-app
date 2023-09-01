@@ -1,0 +1,103 @@
+// prettier-ignore
+$break-points: (
+  mobile:     (             max: 619, expose: true ),
+  mobile-s:   (             max: 360 ),
+  mobile-m:   ( min: 361,   max: 399 ),
+  mobile-l:   ( min: 400,   max: 567 ),
+  mobile-xl:  ( min: 568,   max: 619 ),
+  tablet:     ( min: 620,   max: 1199, expose: true ),
+  tablet-s:   ( min: 620,   max: 767 ),
+  tablet-m:   ( min: 768,   max: 899 ),
+  tablet-l:   ( min: 900,   max: 999 ),
+  tablet-xl:  ( min: 1000,  max: 1199, expose: true ),
+  desktop:    ( min: 1200            , expose: true),
+  desktop-m:  ( min: 1200,  max: 1499),
+  desktop-l:  ( min: 1500,  max: 1899),
+  desktop-xl: ( min: 1900,  max: 2347),
+  desktop-2k: ( min: 2348,  max: 3499),
+  desktop-4k: ( min: 3500,  max: 7379),
+  desktop-8k: ( min: 7380             ),
+  laptop:     ( custom: "(min-width: 1200px) and (max-height: 780px)")
+);
+
+/** 
+* mixin create
+* support 3 variants: 
+* - '-only': select this breakpoint only (by combine both min and max)
+* - '-lt' : less than min only
+* - '-gt': greater than max only
+**/
+@mixin mq($name) {
+  $type: "default";
+  $bp: $name;
+
+  @if (str-index($name, "-only") != null) {
+    $type: "only";
+    $bp: str-slice($name, 0, str-index($name, "-only") - 1);
+  } @else if(str-index($name, "-lt") != null) {
+    $type: "lt";
+    $bp: str-slice($name, 0, str-index($name, "-lt") - 1);
+  } @else if(str-index($name, "-gt") != null) {
+    $type: "gt";
+    $bp: str-slice($name, 0, str-index($name, "-gt") - 1);
+  }
+
+  $sizes: map-get($break-points, $bp);
+
+  @if $sizes != null {
+    $min: map-get($sizes, "min");
+    $max: map-get($sizes, "max");
+
+    @if $type == "default" {
+      @if $min != null {
+        @media (min-width: #{$min}px) {
+          @content;
+        }
+      } @else if $max != null {
+        @media (max-width: #{$max}px) {
+          @content;
+        }
+      } @else if map-get($sizes, "custom") != null {
+        @media #{map-get($sizes, "custom")} {
+          @content;
+        }
+      } @else {
+        @error "Invalid $min, $max value for #{$bp}";
+      }
+    } @else if $type == "only" {
+      @if $min != null and $max != null {
+        @media (min-width: #{$min}px) and (max-width: #{$max}px) {
+          @content;
+        }
+      } @else if $min != null {
+        @media (min-width: #{$min}px) {
+          @content;
+        }
+      } @else if $max != null {
+        @media (max-width: #{$max}px) {
+          @content;
+        }
+      } @else {
+        @error "Invalid $min, $max value for #{$bp}";
+      }
+    } @else if $type == "lt" {
+      @if $min != null {
+        @media (max-width: #{$min - 1}px) {
+          @content;
+        }
+      } @else {
+        @error "Can not set less than for #{bp} because missing min val";
+      }
+    } @else if $type == "gt" {
+      @if $max != null {
+        @media (min-width: #{$max + 1}px) {
+          @content;
+        }
+      } @else {
+        @error "Can not set greater than for #{bp} because missing max val";
+      }
+    }
+  } @else {
+    @error "Breakpoint `#{$bp}` does not exist!";
+  }
+}

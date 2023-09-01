@@ -1,0 +1,25 @@
+@import "styles/mixin.scss";
+@import "styles/variable.scss";
+
+.root {
+  display: flex;
+  z-index: 2;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+
+  @include mq(desktop) {
+    display: none;
+  }
+}
+
+.hambuger {
+  cursor: pointer;
+  transition: 0.2s transform;
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

@@ -1,0 +1,139 @@
+// this define the global style AND it should be inlcude only in index.scss
+
+@import "./variable.scss";
+@import "./mixin.scss";
+@import "./spacing.scss";
+@import "./font-system.scss";
+@import "./reset.scss";
+@import "./default.scss";
+
+// lib import
+@import "react-datepicker/dist/react-datepicker.css";
+@import "./datepicker.scss";
+@import "./ck-editor.scss";
+
+@import "./app.scss";
+
+:root {
+  --display-style: block;
+}
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: black;
+  font-family: "Barlow Condensed", "Poppins", sans-serif;
+}
+
+html {
+  @include interpolate-font-system;
+}
+
+button {
+  font-family: "Barlow Condensed", "Poppins", sans-serif;
+}
+
+// custom
+
+.d-none,
+.hidden {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.user-select-none {
+  user-select: none !important;
+}
+
+.opa-0 {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.opa-1 {
+  opacity: 1 !important;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+// media query class gen
+$display-none: none !important;
+$display-ok: var(--display-style, block);
+// breakpoint class utils gen (only for expose = true)
+// eg: tablet will gen with class: tablet, tablet-only and tablet-lt
+@each $bp, $sizes in $break-points {
+  $min: map-get($sizes, "min");
+  $max: map-get($sizes, "max");
+  $expose: map-get($sizes, "expose");
+
+  @if $expose {
+    .#{$bp} {
+      display: $display-none;
+      @include mq(#{$bp}) {
+        display: $display-ok !important;
+      }
+    }
+
+    @if $min != null {
+      .#{$bp}-lt {
+        display: $display-none;
+        @include mq(#{$bp}-lt) {
+          display: $display-ok !important;
+        }
+      }
+    }
+
+    @if $min != null and $max != null {
+      .#{$bp}-only {
+        display: $display-none;
+        @include mq(#{$bp}-only) {
+          display: $display-ok !important;
+        }
+      }
+    }
+  }
+}
+
+// spacing util class gen
+@each $space in $spacing-list {
+  .p-#{$space} {
+    padding: var(--space-#{$space});
+  }
+  .pt-#{$space} {
+    padding-top: var(--space-#{$space});
+  }
+  .pb-#{$space} {
+    padding-bottom: var(--space-#{$space});
+  }
+  .pl-#{$space} {
+    padding-left: var(--space-#{$space});
+  }
+  .pr-#{$space} {
+    padding-right: var(--space-#{$space});
+  }
+  .m-#{$space} {
+    margin: var(--space-#{$space});
+  }
+  .mt-#{$space} {
+    margin-top: var(--space-#{$space});
+  }
+  .mb-#{$space} {
+    margin-bottom: var(--space-#{$space});
+  }
+  .ml-#{$space} {
+    margin-left: var(--space-#{$space});
+  }
+  .mr-#{$space} {
+    margin-right: var(--space-#{$space});
+  }
+}

@@ -1,0 +1,132 @@
+@import "./mixin.scss";
+@import "./variable.scss";
+
+// font system
+@include font-system;
+
+// specific application style
+
+// hide recaptcha3 badge
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+// section background
+.section-bg {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  img,
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .yt-container {
+    width: 100%;
+    height: 100%;
+  }
+  iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    aspect-ratio: 16/9;
+    width: fit-content;
+    min-width: 100%;
+    height: fit-content;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// from element
+:root {
+  --form-input-color: #000;
+  --form-input-color-disabled: #888;
+}
+
+// reset form auto fill
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  // box-shadow: 0 0 0 30px white inset !important;
+  border-color: white !important;
+}
+
+.form-input-field {
+  width: 100%;
+  margin: 0.5rem 0;
+  color: var(--form-input-color);
+
+  &--disabled {
+    color: var(--form-input-color-disabled);
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 0.65em 0.9em;
+    border: 2px solid currentColor;
+    border-radius: 5px;
+    outline: none;
+    background: #fff;
+    color: currentColor;
+    font-style: italic;
+    font-size: 1.3em;
+    font-family: $font-s;
+
+    &::placeholder {
+      color: currentColor;
+      font-weight: 400;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+  }
+
+  &__error {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    margin-top: 0.3em;
+    gap: 0.5rem;
+    color: #ffc800;
+    font-style: italic;
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+  }
+
+  .checkbox {
+    font-size: 0.85em;
+  }
+
+  .dropdown input {
+    border: 2px solid currentColor;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.anim-spin {
+  animation: spin 0.75s linear infinite;
+}
+
+.text-small {
+  font-size: 0.722rem;
+  line-height: 0.889rem;
+}

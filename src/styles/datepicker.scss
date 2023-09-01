@@ -1,0 +1,75 @@
+@import "styles/mixin.scss";
+@import "styles/variable.scss";
+
+// overide react-datepickker
+
+// override datepicker
+.react-datepicker-wrapper {
+  display: block;
+  position: relative;
+  &::before {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    transform: translateY(-50%) rotate(-45deg);
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+    border-radius: 1px;
+    content: "";
+    pointer-events: none;
+  }
+}
+.react-datepicker {
+  font-family: inherit;
+}
+.react-datepicker__navigation {
+  outline: none;
+}
+.react-datepicker-popper {
+  z-index: 100000 !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  //background-color: $color-p-blue !important;
+}
+
+// modal style for datepicker on mobile
+@include mq(mobile) {
+  .react-datepicker__tab-loop {
+    display: flex;
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .react-datepicker-popper {
+    position: static !important;
+    transform: none !important;
+  }
+
+  .react-datepicker__day-name,
+  .react-datepicker__day,
+  .react-datepicker__time-name {
+    width: 3rem;
+    line-height: 3rem;
+  }
+
+  // Resize for small screens
+  @media (max-width: 400px), (max-height: 550px) {
+    .react-datepicker__day-name,
+    .react-datepicker__day,
+    .react-datepicker__time-name {
+      width: 2rem;
+      line-height: 2rem;
+    }
+  }
+}

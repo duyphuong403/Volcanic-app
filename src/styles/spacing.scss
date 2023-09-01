@@ -1,0 +1,54 @@
+:root {
+  // container space
+  --container-w: 90%; // 100% - 5*2
+  --space-c-x: 5%;
+  --space-c-t: 4.5rem;
+  --space-c-b: 3rem;
+
+  // space system. To override this on other screen, just override --space-unit
+  --space-unit: 1rem;
+  --space-3xs: calc(0.125 * var(--space-unit));
+  --space-2xs: calc(0.25 * var(--space-unit));
+  --space-xs: calc(0.5 * var(--space-unit));
+  --space-s: calc(0.75 * var(--space-unit));
+  --space-m: calc(1.25 * var(--space-unit));
+  --space-l: calc(2 * var(--space-unit));
+  --space-xl: calc(3.25 * var(--space-unit));
+  --space-2xl: calc(5.25 * var(--space-unit));
+  --space-3xl: calc(8.5 * var(--space-unit));
+  --space-4xl: calc(13.75 * var(--space-unit));
+}
+
+@include mq(tablet) {
+  :root {
+    --container-w: clamp(540px, 87%, 960px); // ref at 768 -> 768*0.87 = 668
+    --space-c-x: calc(50% - var(--container-w) / 2);
+
+    // override space system
+    --space-unit: 1.25rem;
+  }
+}
+
+@include mq(desktop) {
+  :root {
+    --container-w: clamp(1000px, 82%, 1280px);
+    --space-c-x: calc(50% - var(--container-w) / 2);
+
+    // override space system
+    --space-unit: 1.25rem;
+  }
+}
+
+@include mq(desktop-2k) {
+  :root {
+    --container-w: 1440px;
+    --space-c-x: calc(50% - var(--container-w) / 2);
+
+    // override space system
+    --space-unit: 1.5rem;
+  }
+}
+
+// defines utils class if need
+
+$spacing-list: ("xxs", "xs", "s", "m", "l", "xl", "xxl");

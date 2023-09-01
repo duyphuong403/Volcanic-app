@@ -1,0 +1,8 @@
+# yaml file double brackets problem
+k8s/
+# svg optimize
+*.svg
+.next/
+.yarn/
+.vscode/
+coverage/

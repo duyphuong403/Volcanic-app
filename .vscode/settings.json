@@ -1,0 +1,53 @@
+{
+  "editor.tabSize": 2,
+  "prettier.printWidth": 180,
+  "blueprint.templatesPath": ["./.vscode/blueprint-templates"],
+  "todohighlight.keywords": [
+    {
+      "text": "NOTE:",
+      "color": "white",
+      "backgroundColor": "#9b59b6",
+      "overviewRulerColor": "#9b59b6"
+    }
+  ],
+  "editor.formatOnSave": true,
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.importStringConfiguration.quoteMark": "double",
+  "importSorter.importStringConfiguration.tabSize": 2,
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 180,
+  "importSorter.sortConfiguration.customOrderingRules.rules": [
+    {
+      // global style should have most top
+      "regex": "styles/.*.(sc|sa|c)?ss$",
+      "orderLevel": 10
+    },
+    {
+      "regex": "^(components|libs|store|utils|mock-data|api|animations|views)",
+      "orderLevel": 30
+    },
+
+    {
+      "regex": "^(assets|@images|@assets)",
+      "orderLevel": 31
+    },
+    {
+      "regex": "^\\..*.(sc|sa|c)?ss$",
+      "orderLevel": 41
+    },
+    {
+      "regex": "^\\.",
+      "orderLevel": 40
+    },
+    {
+      "regex": "^[@]",
+      "orderLevel": 15
+    },
+    {
+      "type": "importMember",
+      "regex": "^$",
+      "orderLevel": 50
+      // "disableSort": true
+    }
+  ]
+}
