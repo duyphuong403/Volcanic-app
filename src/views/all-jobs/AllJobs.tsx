@@ -44,7 +44,7 @@ export interface PopupDeleteType {
   isOpen: boolean;
 }
 
-const MAX_JOB = 10;
+const MAX_JOB = 9;
 
 const AllJobs: React.FC<AllJobProps> = (props) => {
   const [page, setPage] = useState(1);
