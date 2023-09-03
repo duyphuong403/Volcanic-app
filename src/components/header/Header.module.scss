@@ -11,6 +11,7 @@
     0px 4px 5px 0px rgba(0, 0, 0, 0.14),
     0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   z-index: 5;
+  background-color: $color-p-white;
 }
 
 .top-header {
@@ -31,7 +32,7 @@
 .side-menu {
   height: 100vh;
   width: 100vw;
-  background-color: #d2d2d2;
+  background-color: $color-p-white;
   position: absolute;
   right: -100%;
   transition: right 0.3s ease-out;
@@ -39,8 +40,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: $space-2xl $space-c-x;
+  padding: $space-2xl $space-l;
   gap: 2rem;
+  max-width: 17rem;
+  box-shadow:
+    0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
   @include mq(desktop) {
     left: 0;
@@ -51,6 +57,7 @@
       0px 4px 5px 0px rgba(0, 0, 0, 0.14),
       0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     background-color: $color-p-white;
+    align-items: flex-start;
   }
 }
 

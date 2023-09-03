@@ -1,0 +1,61 @@
+@import "styles/mixin.scss";
+@import "styles/variable.scss";
+
+.root {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-width: 40rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include mq(desktop) {
+    max-width: 25rem;
+  }
+
+  @include mq(desktop-l) {
+    width: calc((90%) / 3);
+  }
+}
+
+.title {
+  padding: $space-m $space-l;
+  background-color: #fb5978;
+  color: $color-p-white;
+  text-align: center;
+  position: relative;
+}
+
+.title-expired {
+  background-color: #989898;
+}
+
+.expired {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  transform: rotate(45deg);
+}
+
+.job-info {
+  padding: $space-m;
+  gap: $space-m;
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+
+  div {
+    &:nth-child(even) {
+      font-weight: 600;
+    }
+  }
+}
+
+.cta-btn {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid;
+}

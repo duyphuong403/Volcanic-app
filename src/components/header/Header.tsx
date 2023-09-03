@@ -19,16 +19,12 @@ interface MenuDataType {
 
 const Mock_Menu: MenuDataType[] = [
   {
-    name: "Jobs",
+    name: "All Jobs",
     href: "/jobs",
   },
   {
     name: "Create new job",
     href: "/jobs/new",
-  },
-  {
-    name: "Update a job",
-    href: "/jobs/{id}/edit",
   },
 ];
 
@@ -38,7 +34,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   return (
     <div className={styles["root"]}>
       <div className={styles["top-header"]}>
-        <Link href={"/"} className={styles["logo"]}>
+        <Link href={"/"} className={styles["logo"]} onClick={() => setIsShowSide(false)}>
           <Logo />
         </Link>
         <Hamburger isShowSide={isShowSide} setIsShowSide={() => setIsShowSide(!isShowSide)} />
@@ -46,7 +42,7 @@ const Header: React.FC<HeaderProps> = (props) => {
 
       <div className={classNames(styles["side-menu"], { [styles["side-open"]]: isShowSide })}>
         {Mock_Menu.map((item, index) => (
-          <Link href={item.href} key={index} className={classNames(styles["menu-item"], "text-h2")}>
+          <Link href={item.href} key={index} className={classNames(styles["menu-item"], "text-h3")} onClick={() => setIsShowSide(false)}>
             <span>{item.name}</span>
           </Link>
         ))}
@@ -56,8 +52,3 @@ const Header: React.FC<HeaderProps> = (props) => {
 };
 
 export default Header;
-
-interface MenuListProps {
-  isShowSide?: boolean;
-  setIsShowSide?: Function;
-}

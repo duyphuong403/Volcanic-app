@@ -1,19 +1,20 @@
 // import { getStaticLayoutMainProps } from "@components/layout/main/LayoutMain";
 
-import Homepage from "@views/homepage/Homepage";
+import AllJobs, { getStaticAllJobsProps } from "@views/all-jobs/AllJobs";
 
 import { GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
 import { combineProps } from "utils/combineProps";
 
-export default function IndexPage(data: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <Homepage />;
+export default function NewJobPage(data: InferGetStaticPropsType<typeof getStaticProps>) {
+  return <AllJobs {...data.totalJobs} />;
 }
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const data = await combineProps(
-    context
-    // getStaticLayoutMainProps
+    context,
+    // getStaticLayoutMainProps,
+    getStaticAllJobsProps
   );
 
   return {

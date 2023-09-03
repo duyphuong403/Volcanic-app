@@ -1,13 +1,13 @@
 // import { getStaticLayoutMainProps } from "@components/layout/main/LayoutMain";
 
-import Homepage from "@views/homepage/Homepage";
+import NewJob from "@views/new-job/NewJob";
 
 import { GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
 import { combineProps } from "utils/combineProps";
 
-export default function IndexPage(data: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <Homepage />;
+export default function NewJobPage(data: InferGetStaticPropsType<typeof getStaticProps>) {
+  return <NewJob />;
 }
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {

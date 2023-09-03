@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  webpack(config) {
+  reactStrictMode: false,
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/jobs",
+        permanent: true,
+      },
+    ];
+  },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push({
       test: /\.svg$/i,
-      // issuer: /\.[jt]sx?$/,
       use: [
         {
           loader: "@svgr/webpack",
@@ -15,7 +23,6 @@ const nextConfig = {
         "url-loader",
       ],
     });
-
     return config;
   },
 };

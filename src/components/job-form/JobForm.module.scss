@@ -1,0 +1,13 @@
+@import "styles/mixin.scss";
+@import "styles/variable.scss";
+
+.root {
+  padding: $space-l 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  gap: $space-m;
+}

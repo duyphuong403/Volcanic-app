@@ -1,0 +1,10 @@
+@import "styles/mixin.scss";
+@import "styles/variable.scss";
+
+.root {
+  padding: 6rem $space-c-x 2rem;
+
+  @include mq(desktop) {
+    padding: 6rem 2rem 4rem 22rem;
+  }
+}

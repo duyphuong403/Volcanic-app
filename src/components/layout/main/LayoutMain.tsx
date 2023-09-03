@@ -4,6 +4,7 @@ import Header from "@components/header/Header";
 import React from "react";
 
 // import { combineProps } from "utils/combineProps";
+import styles from "./LayoutMain.module.scss";
 
 export interface LayoutMainDataType {}
 
@@ -15,7 +16,7 @@ const LayoutMain: React.FC<LayoutMainProps> = (props) => {
   return (
     <>
       <Header />
-      <main>{props.children}</main>
+      <main className={styles["root"]}>{props.children}</main>
     </>
   );
 };

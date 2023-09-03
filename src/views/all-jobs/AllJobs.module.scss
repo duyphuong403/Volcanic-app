@@ -1,0 +1,36 @@
+@import "styles/mixin.scss";
+@import "styles/variable.scss";
+
+.root {
+}
+
+.job-cards {
+  margin: $space-l 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-l;
+  justify-content: center;
+  align-items: center;
+
+  @include mq(desktop) {
+    flex-flow: row wrap;
+    align-items: stretch;
+  }
+
+  @include mq(desktop-l) {
+    justify-content: flex-start;
+  }
+}
+
+.no-data {
+  a {
+    color: blue;
+    text-decoration: underline;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
