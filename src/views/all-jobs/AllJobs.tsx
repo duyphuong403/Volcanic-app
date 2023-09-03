@@ -99,7 +99,7 @@ const AllJobs: React.FC<AllJobProps> = (props) => {
   useEffect(() => {
     getJobWithPagination(page, MAX_JOB)
       .then((res) => {
-        setData(res);
+        res && setData(res);
       })
       .catch((error) => console.error(error));
   }, [page]);
@@ -150,16 +150,16 @@ export const getStaticAllJobsProps = async (context: GetStaticPropsContext): Pro
   const resJobID = await sapi.post<AllIdResponseDataType | null>(`${API_SERVER}/graphql`, { query: getAllJobIdsQuery() });
 
   return {
-    data: resJobID?.data?.getAllJobs,
+    data: resJobID?.data?.getAllJobs || null,
   };
 };
 
 const getJobWithPagination = async (page: number, size: number) => {
   const response = await sapi.post<JobDataTypeApiResponseType | null>(`${API_SERVER}/graphql`, { query: getJobQuery(page, size) });
-  return response?.data?.jobs;
+  return response?.data?.jobs || null;
 };
 
 const deleteJob = async (id: number) => {
   const response = await sapi.post(`${API_SERVER}/graphql`, { query: deleteJobByIdQuery(id) });
-  return response?.data?.deleteJob;
+  return response?.data?.deleteJob || null;
 };
