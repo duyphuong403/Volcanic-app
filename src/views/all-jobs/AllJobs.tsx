@@ -36,7 +36,7 @@ export interface JobDataType {
 }
 
 export interface AllJobProps {
-  totalJobs: JobIdType[];
+  data?: JobIdType[];
 }
 
 export interface PopupDeleteType {
@@ -54,8 +54,8 @@ const AllJobs: React.FC<AllJobProps> = (props) => {
   const [data, setData] = useState<JobDataType[]>();
   const router = useRouter();
 
-  const totalRows = props.totalJobs?.length;
-  const totalPages = Math.ceil(totalRows / MAX_JOB);
+  const totalRows = props?.data?.length;
+  const totalPages = Math.ceil((totalRows || 0) / MAX_JOB);
 
   const handlePaginationChange = (_: any, page: number) => {
     setPage(page);
@@ -150,7 +150,7 @@ export const getStaticAllJobsProps = async (context: GetStaticPropsContext): Pro
   const resJobID = await sapi.post<AllIdResponseDataType | null>(`${API_SERVER}/graphql`, { query: getAllJobIdsQuery() });
 
   return {
-    totalJobs: resJobID?.data?.getAllJobs,
+    data: resJobID?.data?.getAllJobs,
   };
 };
 

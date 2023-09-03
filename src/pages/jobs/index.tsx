@@ -7,7 +7,7 @@ import { GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from "
 import { combineProps } from "utils/combineProps";
 
 export default function NewJobPage(data: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <AllJobs {...data.totalJobs} />;
+  return <AllJobs {...data} />;
 }
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
